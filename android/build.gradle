@@ -1,24 +1,17 @@
-// repositories voor alle subprojects
-allprojects {
+buildscript {
     repositories {
         google()
         mavenCentral()
     }
-}
 
-// Build directories netjes scheiden
-rootProject.buildDir = "../build"
-subprojects {
-    project.buildDir = "${rootProject.buildDir}/${project.name}"
-    // Evaluation afhankelijkheid op app
-    project.evaluationDependsOn(":app")
-}
+    dependencies {
+        // Oude regel:
+        // classpath 'com.android.tools.build:gradle:8.1.0'
 
-// Clean task
-tasks.register("clean", Delete) {
-    delete(rootProject.buildDir)
-}
+        // Nieuwe regel:
+        classpath 'com.android.tools.build:gradle:8.1.1'
 
-// Android Gradle Plugin versie check (optioneel)
-// Zorg dat in buildscript dependencies classpath is geüpdatet naar:
-// classpath 'com.android.tools.build:gradle:8.1.1'
+        // Flutter Gradle plugin
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.10'
+    }
+}
