@@ -5,13 +5,7 @@ buildscript {
     }
 
     dependencies {
-        // Oude regel:
-        // classpath 'com.android.tools.build:gradle:8.1.0'
-
-        // Nieuwe regel:
         classpath 'com.android.tools.build:gradle:8.1.1'
-
-        // Flutter Gradle plugin
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.10'
     }
 }
