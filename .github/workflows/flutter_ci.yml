@@ -17,7 +17,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.0'
+          flutter-version: '3.5.3'  # Dit moet overeenkomen met je project SDK
 
       - name: Install dependencies
         run: flutter pub get
@@ -26,7 +26,7 @@ jobs:
         run: flutter analyze
 
       - name: Run tests
-        run: flutter test || true   # Zet tijdelijk op true als je nog geen tests hebt
+        run: flutter test || true
 
       - name: Build Release APK
         run: flutter build apk --release
