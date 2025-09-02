@@ -11,23 +11,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Checkout van je repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # 2. Flutter setup – pakt automatisch de laatste stabiele versie
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.5.3'
           channel: stable
 
+      # 3. Dependencies installeren
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Run static analysis (linter)
+      # 4. Statische analyse uitvoeren (linter)
+      - name: Run static analysis
         run: flutter analyze
 
+      # 5. Unit- en widget-tests uitvoeren
       - name: Run tests
-        run: flutter test || true
+        run: flutter test || true  # tijdelijk true als je nog geen tests hebt
 
+      # 6. Build Release APK
       - name: Build Release APK
         run: flutter build apk --release
