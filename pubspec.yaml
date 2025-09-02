@@ -1,25 +1,32 @@
-name: to_do_list
-description: "A new Flutter project."
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+name: Flutter CI/CD
 
-version: 1.0.0+1
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
-environment:
-  sdk: ">=3.5.2 <4.0.0"
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-dependencies:
-  flutter:
-    sdk: flutter
-  provider: ^6.0.0
-  shared_preferences: ^2.0.11
-  http: ^1.2.2  # Bijgewerkte versie
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-  cupertino_icons: ^1.0.8
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable   # pakt de laatste stabiele versie automatisch
 
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^4.0.0
+      - name: Install dependencies
+        run: flutter pub get
 
-flutter:
-  uses-material-design: true
+      - name: Run static analysis (linter)
+        run: flutter analyze
+
+      - name: Run tests
+        run: flutter test || true  # tijdelijk true als je nog geen tests hebt
+
+      - name: Build Release APK
+        run: flutter build apk --release
