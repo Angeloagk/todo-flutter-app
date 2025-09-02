@@ -1,3 +1,4 @@
+// repositories voor alle subprojects
 allprojects {
     repositories {
         google()
@@ -5,14 +6,19 @@ allprojects {
     }
 }
 
+// Build directories netjes scheiden
 rootProject.buildDir = "../build"
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
-}
-subprojects {
+    // Evaluation afhankelijkheid op app
     project.evaluationDependsOn(":app")
 }
 
+// Clean task
 tasks.register("clean", Delete) {
-    delete rootProject.buildDir
+    delete(rootProject.buildDir)
 }
+
+// Android Gradle Plugin versie check (optioneel)
+// Zorg dat in buildscript dependencies classpath is geüpdatet naar:
+// classpath 'com.android.tools.build:gradle:8.1.1'
