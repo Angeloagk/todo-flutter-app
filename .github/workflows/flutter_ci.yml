@@ -17,7 +17,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.5.3'  # Dit moet overeenkomen met je project SDK
+          flutter-version: '3.5.2' # <-- hier de aangepaste versie
 
       - name: Install dependencies
         run: flutter pub get
